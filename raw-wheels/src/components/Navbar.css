@@ -1,0 +1,471 @@
+/* ==========================================================
+   RAW – A1 BIKE POINT | Navbar.css
+   Floating navy bar: logo, links, Locations dropdown, CTA
+   Breakpoints: mobile/tablet <= 1024px, desktop >= 1025px
+   ========================================================== */
+
+/* Anchored sections must not hide under the floating bar */
+:root {
+  --navbar-radius: 16px;
+  --navbar-offset: 112px;
+}
+
+html {
+  scroll-padding-top: var(--navbar-offset);
+}
+
+/* ---------- Sticky wrapper (gives the floating gap) ---------- */
+.navbar-wrap {
+  /* Gap above the bar. One variable drives both the padding and the sticky
+     offset below, so they can never get out of step. */
+  --navbar-gap: var(--space-2);
+
+  position: sticky;
+  /* FIX: was `top: 0`. The wrapper is transparent, so its top padding was a
+     see-through strip where scrolled content showed ABOVE the bar. A negative
+     top pushes that padding off-screen once the page scrolls: the bar locks
+     flush to the top edge of the viewport and nothing can appear above it.
+     At scroll position 0 the floating gap is still visible. */
+  top: calc(-1 * var(--navbar-gap));
+  z-index: 1000;
+  padding: var(--navbar-gap) var(--space-3);
+  pointer-events: none; /* only the bar itself is clickable */
+}
+
+/* ---------- The bar ---------- */
+.navbar {
+  --link-px: 16px;
+
+  position: relative;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  max-width: var(--container);
+  min-height: 80px;
+  margin: 0 auto;
+  padding: var(--space-1) var(--space-2) var(--space-1) var(--space-3);
+  background-color: var(--navy);
+  /* restrained radius per guidelines (was a 999px pill) */
+  border-radius: var(--navbar-radius);
+  box-shadow: 0 8px 24px rgba(7, 26, 45, 0.14);
+  transition: box-shadow 0.25s ease, border-radius 0.25s ease;
+}
+
+.navbar.is-scrolled {
+  box-shadow: 0 12px 32px rgba(7, 26, 45, 0.24);
+  /* FIX: once the bar is flush with the top edge, square off its top corners
+     so no sliver of page content shows in the rounded corners. */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* ---------- Logo ---------- */
+.navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+}
+
+.navbar__logo img {
+  height: 64px;
+  width: auto; /* proportional resize only: never stretch or crop the logo */
+}
+
+.navbar__logo:hover {
+  text-decoration: none;
+}
+
+/* ---------- Navigation (desktop) ---------- */
+.navbar__nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar__item {
+  position: relative;
+}
+
+.navbar__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px var(--link-px);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--white);
+  background: none;
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease;
+}
+
+.navbar__link:hover {
+  color: var(--white);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Gold underline: shows on hover and marks the current section */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: var(--link-px);
+  right: var(--link-px);
+  bottom: 6px;
+  height: 2px;
+  background-color: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.navbar__link:hover::after,
+.navbar__link[aria-current]::after {
+  transform: scaleX(1);
+}
+
+.navbar__link--button {
+  cursor: pointer;
+}
+
+.navbar__chevron {
+  color: var(--gold);
+  transition: transform 0.2s ease;
+}
+
+.navbar__item--dropdown.is-open .navbar__chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------- Locations dropdown (desktop) ----------
+   Open state is driven only by .is-open (set in JSX for hover,
+   click and keyboard), so a click can always close it again. */
+.navbar__dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  min-width: 200px;
+  padding: var(--space-1);
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(7, 26, 45, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+/* invisible bridge so the pointer isn't lost between button and menu */
+.navbar__dropdown::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.navbar__item--dropdown.is-open .navbar__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.navbar__dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px var(--space-2);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease;
+}
+
+.navbar__dropdown-link svg {
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.navbar__dropdown-link:hover {
+  text-decoration: none;
+  background-color: var(--off-white);
+}
+
+/* ---------- Book button (primary CTA: gold fill, navy text) ---------- */
+.navbar__book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--navy);
+  background-color: var(--gold);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.navbar__book:hover {
+  text-decoration: none;
+  color: var(--navy);
+  background-color: var(--white);
+}
+
+.navbar__book--mobile {
+  display: none;
+}
+
+/* ---------- Focus states (gold ring on navy) ---------- */
+.navbar a:focus-visible,
+.navbar button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* the dropdown card is white, so its links get a navy ring */
+.navbar__dropdown a:focus-visible {
+  outline-color: var(--navy);
+}
+
+/* ---------- Mobile toggle (hidden on desktop) ---------- */
+.navbar__toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  border-radius: var(--radius);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__toggle span,
+.navbar__toggle span::before,
+.navbar__toggle span::after {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  background-color: var(--white);
+  border-radius: 2px;
+  transition: transform 0.25s ease, top 0.25s ease, background-color 0.25s ease;
+}
+
+.navbar__toggle span {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navbar__toggle span::before,
+.navbar__toggle span::after {
+  content: '';
+  left: 0;
+}
+
+.navbar__toggle span::before {
+  top: -6px;
+}
+
+.navbar__toggle span::after {
+  top: 6px;
+}
+
+/* hamburger turns into an X */
+.navbar__toggle.is-open span {
+  background-color: transparent;
+}
+
+.navbar__toggle.is-open span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.navbar__toggle.is-open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* ==========================================================
+   Narrow desktop (1025px to 1180px): tighten spacing so the
+   six links + CTA never crowd the logo
+   ========================================================== */
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .navbar {
+    --link-px: 12px;
+    gap: var(--space-2);
+  }
+
+  .navbar__book {
+    padding: 0 var(--space-3);
+  }
+}
+
+/* ==========================================================
+   Tablet and mobile (up to 1024px)
+   ========================================================== */
+@media (max-width: 1024px) {
+  :root {
+    --navbar-offset: 96px;
+  }
+
+  .navbar-wrap {
+    /* smaller gap; the sticky `top` follows it automatically */
+    --navbar-gap: var(--space-1);
+    padding: var(--navbar-gap) var(--space-2);
+  }
+
+  .navbar {
+    --link-px: 16px;
+
+    min-height: 72px;
+    padding: var(--space-1) var(--space-1) var(--space-1) var(--space-2);
+  }
+
+  .navbar__logo img {
+    height: 56px;
+  }
+
+  .navbar__toggle {
+    display: block;
+  }
+
+  .navbar__book--desktop {
+    display: none;
+  }
+
+  /* Menu panel under the bar (secondary navy so it reads as a card) */
+  .navbar__nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    background-color: var(--navy-dark);
+    border-radius: var(--navbar-radius);
+    box-shadow: 0 12px 32px rgba(7, 26, 45, 0.25);
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* closed state: animated, not display:none */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  .navbar__nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .navbar__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .navbar__link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px var(--space-2);
+    font-size: 16px;
+  }
+
+  .navbar__link::after {
+    display: none;
+  }
+
+  /* current section is shown as a tint instead of an underline */
+  .navbar__link[aria-current] {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Locations dropdown becomes an inline list */
+  .navbar__dropdown {
+    position: static;
+    min-width: 0;
+    margin: 4px 0 4px var(--space-2);
+    padding: 0 0 0 var(--space-1);
+    background: none;
+    border: none;
+    border-left: 2px solid var(--gold);
+    border-radius: 0;
+    box-shadow: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .navbar__dropdown::before {
+    display: none;
+  }
+
+  .navbar__item--dropdown.is-open .navbar__dropdown {
+    display: block;
+    transform: none;
+  }
+
+  /* dropdown links turn white on the navy panel */
+  .navbar__dropdown-link {
+    color: var(--white);
+  }
+
+  .navbar__dropdown-link svg {
+    color: var(--gold);
+  }
+
+  .navbar__dropdown-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .navbar__dropdown a:focus-visible {
+    outline-color: var(--gold);
+  }
+
+  .navbar__book--mobile {
+    display: inline-flex;
+    width: 100%;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .navbar-wrap {
+    /* vertical gap stays var(--navbar-gap); only the sides shrink */
+    padding: var(--navbar-gap) var(--space-1);
+  }
+
+  .navbar__logo img {
+    height: 48px;
+  }
+}

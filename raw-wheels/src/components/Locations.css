@@ -1,0 +1,269 @@
+/* ==========================================================
+   RAW – A1 BIKE POINT | Locations.css
+   Centred heading, two workshop cards side by side
+   Breakpoints: 1 column <= 768px, tighter cards <= 1024px, phones <= 600px
+   ========================================================== */
+
+.locations {
+  background-color: var(--off-white);
+  padding: calc(var(--space-5) * 2) 0;
+}
+
+/* ---------- Heading ---------- */
+.locations__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-5);
+  text-align: center;
+}
+
+/* Same eyebrow as the other sections (gold bar + text). The bordered white
+   pill (999px radius) was a one-off and read as a badge. */
+.locations__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-2);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+.locations__eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 4px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.locations__title {
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* gold marker highlight on one word was removed (decorative gradient) */
+
+.locations__intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--slate);
+  text-wrap: pretty;
+}
+
+/* ---------- Cards ---------- */
+.locations__grid {
+  display: grid;
+  /* minmax(0, 1fr) lets columns shrink instead of overflowing */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  /* the 960px max-width was removed so the cards align with the same
+     content grid as every other section */
+}
+
+.locations__card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+/* The divider line under the card heading was removed: the card already has
+   a border, and extra outlines go against "avoid excessive outlines". */
+.locations__card-head {
+  margin-bottom: var(--space-4);
+}
+
+.locations__name {
+  font-size: 1.5rem; /* 24px card title per guidelines */
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--navy);
+}
+
+.locations__brand {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+/* ---------- Details ---------- */
+.locations__details {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* pushes the buttons to the bottom so both cards line up */
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-style: normal;
+}
+
+.locations__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+/* quiet icon tile: off-white with a navy icon, restrained radius
+   (was a 40px circle) */
+.locations__row-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  color: var(--navy);
+  background-color: var(--off-white);
+  border-radius: var(--radius);
+}
+
+.locations__label {
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+.locations__value {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--navy);
+  overflow-wrap: anywhere; /* long addresses never push the card wider */
+}
+
+/* The phone link has the same colour and weight as the text around it, so it
+   needs a visible underline by default (not colour alone). */
+.locations__phone {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.locations__phone:hover {
+  text-decoration-color: var(--gold);
+}
+
+/* ---------- Buttons ---------- */
+.locations__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.locations__btn {
+  display: inline-flex;
+  flex: 1 1 auto; /* buttons share the row, or each fill it when they wrap */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 var(--space-3);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  border: 2px solid transparent;
+  border-radius: var(--radius); /* was a 999px pill */
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.1s ease;
+}
+
+.locations__btn:hover {
+  text-decoration: none;
+}
+
+.locations__btn:active {
+  transform: translateY(1px);
+}
+
+/* primary: gold fill, navy text */
+.locations__btn--primary {
+  color: var(--navy);
+  background-color: var(--gold);
+  border-color: var(--gold);
+}
+
+.locations__btn--primary:hover {
+  color: var(--white);
+  background-color: var(--navy);
+  border-color: var(--navy);
+}
+
+/* secondary: navy outline on a light background */
+.locations__btn--secondary {
+  color: var(--navy);
+  background-color: transparent;
+  border-color: var(--navy);
+}
+
+.locations__btn--secondary:hover {
+  color: var(--navy);
+  background-color: var(--off-white); /* differs from primary hover */
+}
+
+.locations__btn:focus-visible,
+.locations__phone:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   Tablet (up to 1024px)
+   ========================================================== */
+@media (max-width: 1024px) {
+  .locations {
+    padding: var(--space-5) 0; /* 48px: on the spacing scale (was 64px) */
+  }
+
+  .locations__grid {
+    gap: var(--space-3);
+  }
+
+  .locations__card {
+    padding: var(--space-3);
+  }
+}
+
+/* ==========================================================
+   Small tablet and mobile (up to 768px): one card per row
+   ========================================================== */
+@media (max-width: 768px) {
+  .locations__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================
+   Mobile (up to 600px)
+   ========================================================== */
+@media (max-width: 600px) {
+  .locations__header {
+    margin-bottom: var(--space-4);
+  }
+
+  .locations__intro {
+    font-size: 16px;
+  }
+
+  .locations__actions {
+    flex-direction: column;
+  }
+
+  .locations__btn {
+    width: 100%;
+  }
+}

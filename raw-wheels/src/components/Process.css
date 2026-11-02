@@ -1,0 +1,308 @@
+/* ==========================================================
+   RAW – A1 BIKE POINT | Process.css
+   Navy section: five numbered steps joined by a line
+   Breakpoints: vertical timeline <= 1024px (matches other sections), phones <= 600px
+   ========================================================== */
+
+.process {
+  background-color: var(--navy);
+  color: var(--white);
+  padding: calc(var(--space-5) * 2) 0;
+}
+
+/* ---------- Heading ---------- */
+.process__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-5);
+  text-align: center;
+}
+
+/* Same eyebrow pattern as the other sections (gold bar + text), here in
+   white for the navy background. The old bordered pill (999px radius,
+   extra background) was a one-off and read as a badge. */
+.process__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-2);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--white);
+}
+
+.process__eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 4px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.process__title {
+  margin-bottom: var(--space-2);
+  color: var(--white);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* gold underline on one word was removed (decorative accent) */
+
+.process__intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--off-white);
+  text-wrap: pretty;
+}
+
+/* ---------- Steps (desktop: five columns) ---------- */
+.process__steps {
+  /* One set of sizes drives the circle AND the connector line, so the line
+     can never drift out of alignment (it used hard-coded 31px / 40px / 80px). */
+  --dot: 64px; /* number circle size */
+  --line-gap: 8px; /* space between circle and line end */
+
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: var(--space-5);
+  list-style: none; /* the visible number circles replace default markers */
+}
+
+.process__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--space-1);
+  text-align: center;
+}
+
+/* gold number circle: the one strong marker per step */
+.process__number {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--dot);
+  height: var(--dot);
+  margin-bottom: var(--space-3);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--navy);
+  background-color: var(--gold);
+  border-radius: 50%;
+}
+
+/* horizontal line from this circle to the next one */
+.process__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--dot) / 2 - 1px);
+  left: calc(50% + var(--dot) / 2 + var(--line-gap));
+  width: calc(100% - var(--dot) - var(--line-gap) * 2);
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
+.process__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icon tile: secondary navy with a white icon, same shape as the Why RAW
+   tiles. It was a bright white block that competed with the gold numbers. */
+.process__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--space-3);
+  color: var(--white);
+  background-color: var(--navy-dark);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px; /* restrained (was 16px / 14px) */
+}
+
+.process__step-title {
+  margin-bottom: var(--space-1);
+  font-size: 1.25rem; /* 20px card title per guidelines */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+.process__step-text {
+  max-width: 240px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--off-white);
+  text-wrap: pretty;
+}
+
+/* ---------- Call to action ---------- */
+.process__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.process__cta-text {
+  font-size: 18px;
+  color: var(--white);
+}
+
+/* primary button: gold fill, navy text; same shape as Navbar/Hero/Services */
+.process__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  color: var(--navy);
+  background-color: var(--gold);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius); /* was a 999px pill */
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.process__btn svg {
+  transition: transform 0.2s ease;
+}
+
+.process__btn:hover {
+  text-decoration: none;
+  color: var(--navy);
+  background-color: var(--white);
+  border-color: var(--white);
+}
+
+.process__btn:hover svg {
+  transform: translateX(4px);
+}
+
+.process__btn:active {
+  transform: translateY(1px);
+}
+
+.process__btn:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   Narrow desktop (1025px to 1180px): five columns get tight,
+   so reduce the side padding of each step
+   ========================================================== */
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .process__step {
+    padding: 0 4px;
+  }
+}
+
+/* ==========================================================
+   Tablet and mobile (up to 1024px): vertical timeline
+   ========================================================== */
+@media (max-width: 1024px) {
+  .process {
+    padding: var(--space-5) 0; /* 48px: on the spacing scale (was 64px) */
+  }
+
+  .process__steps {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .process__step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: 0 0 var(--space-4);
+    text-align: left;
+  }
+
+  .process__step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process__number {
+    margin-bottom: 0;
+  }
+
+  /* vertical line between circles, from the same --dot value */
+  .process__step:not(:last-child)::after {
+    top: calc(var(--dot) + var(--line-gap));
+    bottom: var(--line-gap);
+    left: calc(var(--dot) / 2 - 1px);
+    width: 2px;
+    height: auto;
+  }
+
+  .process__body {
+    align-items: flex-start;
+    padding-top: 4px;
+  }
+
+  .process__icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--space-2);
+  }
+
+  .process__step-text {
+    max-width: none;
+  }
+}
+
+/* ==========================================================
+   Mobile (up to 600px)
+   ========================================================== */
+@media (max-width: 600px) {
+  .process__steps {
+    --dot: 56px;
+  }
+
+  .process__header {
+    margin-bottom: var(--space-4);
+  }
+
+  .process__intro,
+  .process__cta-text {
+    font-size: 16px;
+  }
+
+  .process__number {
+    font-size: 20px;
+  }
+
+  .process__btn {
+    width: 100%;
+  }
+
+  .process__cta {
+    align-items: stretch;
+  }
+
+  .process__cta-text {
+    text-align: center;
+  }
+}

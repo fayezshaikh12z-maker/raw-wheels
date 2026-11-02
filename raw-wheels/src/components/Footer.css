@@ -1,0 +1,286 @@
+/* ==========================================================
+   RAW – A1 BIKE POINT | Footer
+   Uses the brand variables defined in index.css.
+   Palette: Deep Navy #071A2D, Dark Navy #0B2239, Gold #FFC20E, White.
+   Spacing scale: 8 / 16 / 24 / 32 / 48 only.
+   ========================================================== */
+
+.footer {
+  background-color: var(--navy);
+  color: var(--white);
+  /* Thin gold rule echoes the gold outline of the logo (accent, not a fill) */
+  border-top: 4px solid var(--gold);
+  padding-top: var(--space-5);
+}
+
+/* Uses the shared .container (1200px) so the footer lines up with every
+   other section on the same content grid. */
+
+/* ---------- Main grid (desktop) ---------- */
+.footer__grid {
+  display: grid;
+  /* minmax(0, …) stops long addresses from stretching a column */
+  grid-template-columns:
+    minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: var(--space-5) var(--space-4);
+  padding-bottom: var(--space-5);
+}
+
+/* ---------- Brand column ---------- */
+/* Transparent logo sits directly on the navy footer, same as the navbar.
+   No plate, background or padding: the gold outline defines the shape.
+   The bottom margin keeps clear space between the logo and the tagline. */
+.footer__logo-link {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  transition: transform 0.2s ease;
+}
+
+.footer__logo-link:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.footer__logo {
+  width: 120px;
+  height: auto; /* keep original aspect ratio – never stretch the logo */
+}
+
+.footer__tagline {
+  max-width: 320px;
+  margin-bottom: var(--space-2);
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.footer__descriptor {
+  max-width: 320px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- Social icons ---------- */
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; /* 44px minimum touch target */
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--white);
+  color: var(--navy);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.footer__social-link:hover {
+  background-color: var(--gold);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+/* ---------- Column headings ---------- */
+.footer__heading {
+  margin-bottom: var(--space-3);
+  font-size: 1.125rem; /* 18px – label-sized, but still clearly a heading */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+/* Short gold bar under each heading – accent only */
+.footer__heading::after {
+  content: '';
+  display: block;
+  width: var(--space-4);
+  height: 3px;
+  margin-top: var(--space-1);
+  border-radius: 2px;
+  background-color: var(--gold);
+}
+
+.footer__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__list--locations,
+.footer__list--hours {
+  gap: var(--space-3);
+}
+
+/* ---------- Links ---------- */
+.footer__link {
+  display: inline-block;
+  padding: var(--space-1) 0;
+  font-size: 1rem; /* essential info stays at body size (16px) */
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__link:hover {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* Gold text is only used on navy, where contrast is strong */
+.footer__link--accent {
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.footer__link--accent:hover {
+  color: var(--white);
+}
+
+.footer__link--small {
+  font-size: 0.875rem; /* legal links are captions: 14px */
+}
+
+/* ---------- Locations ---------- */
+.footer__location-name {
+  margin-bottom: var(--space-1);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.footer__address {
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-3);
+  margin-top: var(--space-1);
+}
+
+/* ---------- Hours ---------- */
+.footer__hours-label {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer__hours-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* ---------- Bottom bar (full-width Dark Navy band) ---------- */
+.footer__bottom {
+  background-color: var(--navy-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: var(--space-3) 0;
+}
+
+.footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.footer__copy {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+
+/* ---------- Tablet (601px – 1024px) ---------- */
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5) var(--space-4);
+  }
+
+  /* Brand gets its own full-width row */
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+
+  /* Explore | Opening hours side by side, workshops full width below.
+     Opening hours has no links, so the visual reorder does not affect
+     keyboard order. */
+  .footer__col--hours {
+    order: 2;
+  }
+
+  .footer__col--locations {
+    order: 3;
+    grid-column: 1 / -1;
+  }
+
+  /* The two workshops sit side by side */
+  .footer__list--locations {
+    flex-direction: row;
+    gap: var(--space-5);
+  }
+
+  .footer__list--locations > li {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+/* ---------- Mobile (≤ 600px) ---------- */
+@media (max-width: 600px) {
+  .footer {
+    padding-top: var(--space-4);
+  }
+
+  .footer__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+
+  .footer__col--hours,
+  .footer__col--locations {
+    order: 0; /* back to natural reading order */
+  }
+
+  .footer__list--locations {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  /* 44px minimum touch targets */
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .footer__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

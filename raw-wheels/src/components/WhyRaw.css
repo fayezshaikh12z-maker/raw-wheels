@@ -1,0 +1,151 @@
+/* ==========================================================
+   RAW – A1 BIKE POINT | WhyRaw.css
+   Centred heading, 3 x 2 grid of trust cards
+   Breakpoints: 2 columns <= 1024px (matches other sections), 1 column <= 600px
+   ========================================================== */
+
+.why {
+  background-color: var(--white);
+  padding: calc(var(--space-5) * 2) 0;
+}
+
+/* ---------- Heading ---------- */
+.why__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-5);
+  text-align: center;
+}
+
+/* Same eyebrow as Hero and Services (gold bar + text).
+   The old pill badge with border and background is gone: it was a
+   different pattern from every other section and added a 999px radius. */
+.why__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-2);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+.why__eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 4px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.why__title {
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* gold marker highlight on one word was removed (decorative gradient) */
+
+.why__intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--slate);
+  text-wrap: pretty;
+}
+
+/* ---------- Cards grid ---------- */
+.why__grid {
+  display: grid;
+  /* minmax(0, 1fr) lets tracks shrink instead of overflowing */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.why__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4);
+  background-color: var(--off-white);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  /* Cards are not links, so they must not lift or glow gold on hover
+     (that suggests they are clickable). A calm surface change is enough. */
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.why__card:hover {
+  background-color: var(--white);
+  border-color: var(--border);
+  box-shadow: 0 8px 24px rgba(7, 26, 45, 0.08); /* navy-tinted, light */
+}
+
+/* Navy tile with a gold icon: echoes the logo (navy body, gold detail) and
+   avoids six large solid-gold blocks (gold = deliberate accent, ~10%). */
+.why__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-3);
+  color: var(--gold); /* the SVG uses currentColor */
+  background-color: var(--navy);
+  border-radius: 12px;
+}
+
+.why__card-title {
+  margin-bottom: var(--space-1);
+  font-size: 1.25rem; /* 20px card title per guidelines */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+.why__card-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--slate);
+  text-wrap: pretty;
+}
+
+/* ==========================================================
+   Tablet (up to 1024px): 2 columns
+   ========================================================== */
+@media (max-width: 1024px) {
+  .why {
+    padding: var(--space-5) 0; /* 48px: on the spacing scale (was 64px) */
+  }
+
+  .why__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ==========================================================
+   Mobile (up to 600px): 1 column
+   ========================================================== */
+@media (max-width: 600px) {
+  .why__header {
+    margin-bottom: var(--space-4);
+  }
+
+  .why__intro {
+    font-size: 16px;
+  }
+
+  .why__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .why__card {
+    padding: var(--space-3);
+  }
+}

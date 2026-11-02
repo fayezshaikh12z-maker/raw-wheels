@@ -1,0 +1,262 @@
+/* ==========================================================
+   RAW – A1 BIKE POINT | Testimonials section
+   Uses the brand variables defined in index.css
+   Breakpoints: 3 columns >= 1025px, 2 columns 601px to 1024px,
+   1 column <= 600px (same 1024px / 600px steps as other sections)
+   ========================================================== */
+
+/* White section: the Locations section above is off-white, and two
+   off-white sections in a row merge into one block. The cards are
+   off-white instead (same pattern as Why RAW). */
+.testimonials {
+  background-color: var(--white);
+  padding: calc(var(--space-5) * 2) 0;
+}
+
+/* ---------- Header ---------- */
+.testimonials__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-5);
+  text-align: center;
+}
+
+/* Same eyebrow as Hero, Services and the other sections (gold bar + text).
+   The old pill had an off-white background on an off-white section, so only
+   its border showed, and it used a 999px radius. */
+.testimonials__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-2);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+.testimonials__eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 4px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.testimonials__title {
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* gold highlight on one word was removed (decorative gradient) */
+
+.testimonials__subtitle {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--slate);
+  text-wrap: pretty;
+}
+
+/* ---------- Grid ---------- */
+.testimonials__grid {
+  display: grid;
+  /* minmax(0, 1fr) lets tracks shrink instead of overflowing */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.testimonials__item {
+  display: flex;
+}
+
+/* ---------- Card ---------- */
+.testimonials__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-4);
+  background-color: var(--off-white);
+  /* no border and no divider line: the surface colour already defines the
+     card, and the guidelines say to avoid excessive outlines */
+  border-radius: 16px; /* same as the other cards (was 8px) */
+}
+
+/* ---------- Stars ---------- */
+.testimonials__stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--space-2);
+}
+
+.testimonials__star {
+  fill: var(--gold);
+}
+
+/* empty stars differ by shape (outline), not only by colour */
+.testimonials__star--empty {
+  fill: none;
+  stroke: var(--slate);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+/* ---------- Quote ---------- */
+.testimonials__quote {
+  flex: 1;
+  margin: 0 0 var(--space-3);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--slate);
+  overflow-wrap: break-word; /* long words in real reviews can't widen the card */
+  text-wrap: pretty;
+}
+
+/* ---------- Author ---------- */
+.testimonials__author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* navy circle with a gold initial: echoes the logo (navy body, gold detail) */
+.testimonials__avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--navy);
+  color: var(--gold);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.testimonials__author-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.testimonials__name {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+.testimonials__meta {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+/* ---------- Call to action ---------- */
+.testimonials__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  text-align: center;
+}
+
+.testimonials__cta-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+/* primary button: gold fill, navy text; same shape as the other sections */
+.testimonials__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  background-color: var(--gold);
+  color: var(--navy);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius); /* was a 999px pill */
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.1s ease;
+}
+
+/* hover was #e6ad00, a colour that is not in the brand palette; it now
+   uses the same navy fill as every other primary button */
+.testimonials__button:hover {
+  color: var(--white);
+  background-color: var(--navy);
+  border-color: var(--navy);
+  text-decoration: none;
+}
+
+.testimonials__button:active {
+  transform: translateY(1px);
+}
+
+.testimonials__button:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   Tablet (up to 1024px): 2 columns
+   ========================================================== */
+@media (max-width: 1024px) {
+  .testimonials {
+    padding: var(--space-5) 0; /* 48px */
+  }
+
+  .testimonials__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* an odd last card spans the full row instead of sitting alone on the left */
+  .testimonials__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================
+   Mobile (up to 600px): 1 column
+   ========================================================== */
+@media (max-width: 600px) {
+  .testimonials__header {
+    margin-bottom: var(--space-4);
+  }
+
+  .testimonials__subtitle,
+  .testimonials__cta-text {
+    font-size: 16px;
+  }
+
+  .testimonials__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .testimonials__card {
+    padding: var(--space-3);
+  }
+
+  .testimonials__cta {
+    align-items: stretch;
+  }
+
+  .testimonials__button {
+    width: 100%;
+  }
+}
